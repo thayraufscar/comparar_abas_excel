@@ -20,7 +20,7 @@ def normalize_text(text):
 arquivo_entrada = "entrada.xlsx"
 aba1 = "Sheet1"   # primeira aba
 aba2 = "Sheet2"   # segunda aba
-coluna = "Titulo" # coluna a comparar
+coluna = "title" # coluna a comparar
 arquivo_saida = "comparacao_abas.xlsx"
 
 # === PROCESSO ===
@@ -43,7 +43,7 @@ somente2 = df2[df2["__normalizado__"].isin(set2 - set1)].drop(columns="__normali
 # Interseção (registros em comum)
 comum = df1[df1["__normalizado__"].isin(set1 & set2)].drop(columns="__normalizado__")
 
-# Exporta resultado em três abas
+# Salva resultado mantendo todas as colunas originais
 with pd.ExcelWriter(arquivo_saida) as writer:
     somente1.to_excel(writer, sheet_name="Somente_" + aba1, index=False)
     somente2.to_excel(writer, sheet_name="Somente_" + aba2, index=False)
